@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PawVibesZ — Cats on Zoom for the Silent Generation</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Barlow+Condensed:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FFF8EC;
+    --warm-white: #FFFDF7;
+    --coral: #E8553E;
+    --gold: #F5A623;
+    --teal: #1A7B74;
+    --navy: #1B2D5A;
+    --rose: #D4527A;
+    --mint: #4BAF8C;
+    --butter: #F9E07F;
+    --lavender: #9B7FBE;
+    --rust: #C0471D;
+    --sky: #4BA3C3;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--cream);
+    font-family: 'DM Sans', 'Nunito', sans-serif;
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #2A4A8A 40%, var(--teal) 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(245,166,35,0.18) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(212,82,122,0.18) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(75,175,140,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Floating paw prints */
+  .paw-bg {
+    position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+  }
+  .paw-bg span {
+    position: absolute;
+    font-size: clamp(20px, 3vw, 44px);
+    opacity: 0.12;
+    animation: floatPaw linear infinite;
+  }
+  @keyframes floatPaw {
+    0%   { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.15; }
+    90%  { opacity: 0.15; }
+    100% { transform: translateY(-150px) rotate(360deg); opacity: 0; }
+  }
+
+  .hero-badge {
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'DM Sans', sans-serif;
+    text-transform: uppercase;
+    padding: 8px 24px;
+    border-radius: 50px;
+    margin-bottom: 28px;
+    display: inline-block;
+    box-shadow: 0 4px 20px rgba(245,166,35,0.4);
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    color: #fff;
+    line-height: 0.95;
+    margin-bottom: 12px;
+    animation: fadeDown 0.9s ease 0.1s both;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+  }
+
+  .hero h1 span { color: var(--gold); }
+
+  .hero-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(30px, 5.5vw, 58px);
+    font-weight: 900;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--coral) 35%, #ff85c0 65%, var(--mint) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 40px;
+    animation: fadeDown 1s ease 0.2s both;
+    filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+  }
+
+  .hero-cats {
+    font-size: clamp(48px, 8vw, 90px);
+    line-height: 1;
+    margin-bottom: 44px;
+    animation: fadeDown 1s ease 0.3s both;
+    filter: drop-shadow(0 6px 20px rgba(0,0,0,0.3));
+  }
+
+  .hero-desc {
+    max-width: 640px;
+    font-size: clamp(15px, 2vw, 18px);
+    color: rgba(255,255,255,0.82);
+    line-height: 1.8;
+    margin-bottom: 50px;
+    animation: fadeDown 1s ease 0.4s both;
+  }
+
+  .btn-group {
+    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    animation: fadeDown 1s ease 0.5s both;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'Nunito', sans-serif;
+    border-radius: 50px;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 6px 28px rgba(245,166,35,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 35px rgba(245,166,35,0.6); }
+
+  .btn-secondary {
+    background: transparent;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    border-radius: 50px;
+    text-decoration: none;
+    border: 2px solid rgba(255,255,255,0.5);
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== RIBBON DIVIDER ===== */
+  .ribbon {
+    background: var(--gold);
+    padding: 14px 20px;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    color: var(--navy);
+    letter-spacing: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ribbon-inner { display: inline-block; animation: ticker 28s linear infinite; }
+  @keyframes ticker {
+    0% { transform: translateX(100vw); }
+    100% { transform: translateX(-100%); }
+  }
+
+  /* ===== SECTIONS ===== */
+  section { padding: 80px 20px; }
+
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+
+  .section-text {
+    font-size: clamp(15px, 1.8vw, 18px);
+    line-height: 1.85;
+    max-width: 720px;
+  }
+
+  /* ===== GENERATION SECTION ===== */
+  .gen-section { background: var(--warm-white); }
+
+  .gen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+    margin-top: 52px;
+  }
+
+  .gen-card {
+    border-radius: 20px;
+    padding: 36px 30px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .gen-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.14); }
+
+  .gen-card .card-emoji { font-size: 48px; margin-bottom: 18px; display: block; }
+  .gen-card h3 {
+    font-family: 'Nunito', sans-serif;
+  }
+  .gen-card p { font-size: 15px; line-height: 1.75; opacity: 0.88; }
+
+  .card-coral  { background: var(--coral); color: #fff; }
+  .card-teal   { background: var(--teal); color: #fff; }
+  .card-navy   { background: var(--navy); color: #fff; }
+  .card-rose   { background: var(--rose); color: #fff; }
+  .card-mint   { background: var(--mint); color: #fff; }
+  .card-gold   { background: var(--gold); color: var(--navy); }
+  .card-lavender { background: var(--lavender); color: #fff; }
+  .card-sky    { background: var(--sky); color: #fff; }
+
+  /* ===== MEDIA & TECH TIMELINE ===== */
+  .timeline-section { background: var(--navy); color: #fff; }
+  .timeline-section .section-title { color: var(--butter); }
+  .timeline-section .section-label { color: var(--gold); }
+
+  .timeline {
+    position: relative;
+    margin-top: 56px;
+    padding-left: 40px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--gold), var(--coral), var(--mint), var(--sky));
+    border-radius: 2px;
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 44px;
+    animation: slideIn 0.6s ease both;
+  }
+
+  .tl-dot {
+    position: absolute;
+    left: -50px; top: 4px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 3px solid var(--navy);
+    box-shadow: 0 0 0 3px currentColor;
+  }
+  .tl-dot.gold   { background: var(--gold); color: var(--gold); }
+  .tl-dot.coral  { background: var(--coral); color: var(--coral); }
+  .tl-dot.mint   { background: var(--mint); color: var(--mint); }
+  .tl-dot.sky    { background: var(--sky); color: var(--sky); }
+  .tl-dot.rose   { background: var(--rose); color: var(--rose); }
+  .tl-dot.lavender { background: var(--lavender); color: var(--lavender); }
+
+  .tl-year {
+    font-family: 'Barlow Condensed', sans-serif;
+    margin-bottom: 6px;
+  }
+  .tl-event h4 {
+    font-family: 'Nunito', sans-serif;
+  }
+  .tl-event p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.75); }
+
+  .tl-cat { font-size: 22px; margin-left: 8px; }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  /* ===== CATS + COMPANIONSHIP ===== */
+  .cats-section { background: var(--coral); color: #fff; }
+  .cats-section .section-label { color: var(--butter); }
+
+  .cats-feature {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-top: 52px;
+  }
+  @media (max-width: 700px) { .cats-feature { grid-template-columns: 1fr; } }
+
+  .cats-big-emoji {
+    font-size: clamp(80px, 14vw, 160px);
+    text-align: center;
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.2));
+    animation: purr 3s ease-in-out infinite;
+  }
+  @keyframes purr {
+    0%, 100% { transform: scale(1) rotate(-2deg); }
+    50%       { transform: scale(1.06) rotate(2deg); }
+  }
+
+  .cats-facts { display: flex; flex-direction: column; gap: 22px; }
+  .cat-fact {
+    background: rgba(255,255,255,0.18);
+    border-radius: 16px;
+    padding: 22px 26px;
+    border-left: 5px solid var(--butter);
+  }
+  .cat-fact h4 {
+    font-family: 'Nunito', sans-serif;
+  }
+  .cat-fact p { font-size: 14px; line-height: 1.7; opacity: 0.9; }
+
+  /* ===== QUOTES ===== */
+  .quotes-section { background: var(--cream); }
+
+  .quotes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+    margin-top: 52px;
+  }
+
+  .quote-card {
+    padding: 36px 30px;
+    border-radius: 20px;
+    position: relative;
+  }
+  .quote-card::before {
+    content: '\201C';
+    font-family: 'Barlow Condensed', sans-serif;
+    line-height: 1;
+    opacity: 0.25;
+    position: absolute;
+    top: 12px; left: 20px;
+  }
+  .quote-card blockquote {
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.8;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 1;
+  }
+  .quote-card cite {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    opacity: 0.7;
+    text-transform: uppercase;
+    font-style: normal;
+  }
+  .q-teal   { background: var(--teal); color: #fff; }
+  .q-gold   { background: var(--butter); color: var(--navy); }
+  .q-rose   { background: var(--rose); color: #fff; }
+  .q-lavender { background: var(--lavender); color: #fff; }
+
+  /* ===== HERITAGE CAROUSEL ===== */
+  .heritage-section {
+    background: linear-gradient(135deg, var(--navy) 0%, #0F1E3C 100%);
+    color: #fff;
+  }
+  .heritage-section .section-title { color: var(--butter); }
+  .heritage-section .section-label { color: var(--mint); }
+
+  .heritage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 52px;
+  }
+
+  .heritage-card {
+    border-radius: 18px;
+    padding: 30px 24px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    transition: background 0.3s, transform 0.3s;
+  }
+  .heritage-card:hover {
+    background: rgba(255,255,255,0.13);
+    transform: translateY(-4px);
+  }
+  .heritage-card .h-icon { font-size: 40px; margin-bottom: 14px; display: block; }
+  .heritage-card h3 {
+    font-family: 'Nunito', sans-serif;
+  }
+  .heritage-card p { font-size: 14px; line-height: 1.75; opacity: 0.82; }
+
+  /* ===== CTA ===== */
+  .cta-section {
+    background: linear-gradient(135deg, var(--mint) 0%, var(--teal) 100%);
+    text-align: center;
+    padding: 100px 20px;
+    color: #fff;
+  }
+  .cta-section h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    margin-bottom: 20px;
+    line-height: 1.05;
+  }
+  .cta-section p {
+    font-size: clamp(16px, 2vw, 20px);
+    opacity: 0.9;
+    max-width: 580px;
+    margin: 0 auto 44px;
+    line-height: 1.75;
+  }
+  .cta-cats { font-size: 60px; margin-bottom: 30px; animation: purr 2s ease-in-out infinite; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #0A1228;
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 48px 20px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  .footer-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    margin-bottom: 12px;
+  }
+  .footer-paws { font-size: 28px; letter-spacing: 6px; margin-bottom: 20px; display: block; opacity: 0.5; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 600px) {
+    section { padding: 60px 16px; }
+    .timeline { padding-left: 30px; }
+    .tl-dot { left: -40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating paw print background -->
+<div class="paw-bg" id="pawBg"></div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <span class="hero-badge">🐾 Born 1928–1945 · The Builders · The Traditionalists</span>
+  <h1><span>Paw</span>VibesZ</h1>
+  <p class="hero-sub">Cats on Zoom — Made for the Silent Generation</p>
+  <div class="hero-cats">🐱 😺 🐾 😸 🐈</div>
+  <p class="hero-desc">
+    You built the world we live in. You danced to the first rock and roll,
+    watched television arrive in the living room, and weathered storms that
+    would have broken lesser generations. Now there's a new joy waiting — 
+    furry, purring, and just one click away on Zoom.
+  </p>
+  <div class="btn-group">
+    <a href="https://paniaguai.github.io/pawz/" target="_blank" class="btn-primary">🐾 Visit the Official PawVibesZ Site</a>
+    <a href="#learn-more" class="btn-secondary">Learn More ↓</a>
+  </div>
+</section>
+
+<!-- ===== TICKER ===== -->
+<div class="ribbon">
+  <span class="ribbon-inner">
+    🐱 PawVibesZ — Cats on Zoom for Your Generation &nbsp;·&nbsp; 🐾 Purring Companions, Live &amp; Virtual &nbsp;·&nbsp; 😺 Built for the Silent Generation &nbsp;·&nbsp; 🎶 Rock &amp; Roll, Radio Days &amp; Real Cats &nbsp;·&nbsp; 🐈 Join the Paw Family Today &nbsp;·&nbsp; 🌟 Your Generation Built the World — Let Cats Brighten Your Day &nbsp;·&nbsp;
+  </span>
+</div>
+
+<!-- ===== YOUR GENERATION ===== -->
+<section class="gen-section" id="learn-more">
+  <div class="section-inner">
+    <span class="section-label" style="color:var(--coral)">Who You Are</span>
+    <h2 class="section-title">The Silent Generation:<br>Anything But Silent</h2>
+    <p class="section-text">
+      Born between 1928 and 1945, you are the Traditionalists, the Builders — the generation
+      that grew up during the Great Depression and World War II, came of age during postwar prosperity,
+      and quietly changed the world. Here's what made your generation extraordinary:
+    </p>
+    <div class="gen-grid">
+      <div class="gen-card card-coral">
+        <span class="card-emoji">💪</span>
+        <h3>The Builders</h3>
+        <p>You literally and metaphorically built nations. Rising from Depression-era scarcity and wartime sacrifice, your generation created the postwar prosperity that lifted millions.</p>
+      </div>
+      <div class="gen-card card-teal">
+        <span class="card-emoji">✊</span>
+        <h3>Civil Rights Champions</h3>
+        <p>Far from silent on justice, your generation formed the leadership of the civil rights movement — Rosa Parks, Martin Luther King Jr., and countless unsung heroes were Silents.</p>
+      </div>
+      <div class="gen-card card-navy">
+        <span class="card-emoji">🎸</span>
+        <h3>Rock & Roll Pioneers</h3>
+        <p>You didn't just hear the first rock and roll — you created it. Elvis, Little Richard, Chuck Berry — the music that changed the world forever came from your generation.</p>
+      </div>
+      <div class="gen-card card-rose">
+        <span class="card-emoji">📻</span>
+        <h3>Radio Was Everything</h3>
+        <p>By 1939, over 85% of British households had a wireless. Radio was the heartbeat of your childhood — news, drama, music, and laughter all through one glowing dial.</p>
+      </div>
+      <div class="gen-card card-gold">
+        <span class="card-emoji">🌟</span>
+        <h3>Resilience Personified</h3>
+        <p>You survived scarcity, rationing, and wartime disruption — and emerged with a deep resilience and appreciation for community, tradition, and the small joys of daily life.</p>
+      </div>
+      <div class="gen-card card-mint">
+        <span class="card-emoji">🏡</span>
+        <h3>The Postwar Dreamers</h3>
+        <p>The 1950s prosperity era was yours. New televisions, labour-saving appliances, and the suburb — you lived through a transformation in everyday life unlike any before.</p>
+      </div>
+      <div class="gen-card card-lavender">
+        <span class="card-emoji">📚</span>
+        <h3>Education &amp; Tradition</h3>
+        <p>Your generation valued education fiercely — grammar schools opened doors, libraries were sacred, and the love of reading and learning was passed down with pride.</p>
+      </div>
+      <div class="gen-card card-sky">
+        <span class="card-emoji">🕊️</span>
+        <h3>Seen But Not Heard — Then Heard</h3>
+        <p>Raised in a culture of discipline and respect, you learned the power of patience. And when you finally spoke — through music, civil rights, and the counterculture — the world listened.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MEDIA & TECH TIMELINE ===== -->
+<section class="timeline-section">
+  <div class="section-inner">
+    <span class="section-label">Media &amp; Technology Through Your Life</span>
+    <h2 class="section-title">From Radio Days<br>to Zoom Calls 🐱</h2>
+    <p class="section-text" style="color:rgba(255,255,255,0.8)">
+      Your generation has witnessed every major communications revolution — 
+      from the crackle of radio static to the miracle of video calling a purring cat from across the world.
+    </p>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot gold"></div>
+        <div class="tl-year">1930s–40s</div>
+        <div class="tl-event">
+          <h4>📻 The Golden Age of Radio</h4>
+          <p>Over 85% of homes had a wireless set by 1939. Radio dramas, news bulletins, and big band music shaped your childhood soundscape. It was the first mass media — and it was magical.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot coral"></div>
+        <div class="tl-year">1950s</div>
+        <div class="tl-event">
+          <h4>📺 Television Arrives in the Living Room</h4>
+          <p>Consumer televisions transformed daily life. From black-and-white newsreels to I Love Lucy, the TV became the family hearth — and cats quickly became TV companions too. <span class="tl-cat">🐈</span></p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot mint"></div>
+        <div class="tl-year">1960s</div>
+        <div class="tl-event">
+          <h4>🎶 Rock, Revolution &amp; Media Explosion</h4>
+          <p>Your generation made rock and roll. The counterculture movement you led used media — TV, records, radio — as a platform for social change. The medium was the message.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot sky"></div>
+        <div class="tl-year">1980s–90s</div>
+        <div class="tl-event">
+          <h4>💻 Personal Computers &amp; the Digital Dawn</h4>
+          <p>The home computer arrived. Many in your generation adapted remarkably, learning new tools with the same determination that got you through the Depression. Technology has never scared builders.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot rose"></div>
+        <div class="tl-year">2000s–2010s</div>
+        <div class="tl-event">
+          <h4>📱 The Internet &amp; Social Connection</h4>
+          <p>Email, then smartphones, then social media. Your generation showed every younger cohort how to connect across distance — and how important it is to maintain real relationships through technology.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot lavender"></div>
+        <div class="tl-year">2020s</div>
+        <div class="tl-event">
+          <h4>📹 Zoom &amp; PawVibesZ — Cats on Call! <span class="tl-cat">😺🐾</span></h4>
+          <p>Video calling brought families together across continents. And now PawVibesZ brings the joy of real, purring cats directly to your screen — live, interactive Zoom cat sessions designed with your comfort and joy in mind.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== CATS & COMPANIONSHIP ===== -->
+<section class="cats-section">
+  <div class="section-inner">
+    <span class="section-label">Why Cats?</span>
+    <h2 class="section-title">Cats Have Always<br>Been There</h2>
+    <div class="cats-feature">
+      <div class="cats-big-emoji">🐱<br>🐾<br>😺</div>
+      <div class="cats-facts">
+        <div class="cat-fact">
+          <h4>🏡 Lifelong Companions</h4>
+          <p>Cats have been household companions throughout human history — in ancient Egypt they were sacred, and through the ages they've been beloved family members. Your generation grew up with them.</p>
+        </div>
+        <div class="cat-fact">
+          <h4>💗 Proven Wellbeing Benefits</h4>
+          <p>Research consistently shows that watching cats — even on screen — reduces stress, lowers blood pressure, and lifts mood. A purring cat, even through a screen, is genuinely soothing.</p>
+        </div>
+        <div class="cat-fact">
+          <h4>🌐 Connection Across Distance</h4>
+          <p>Not everyone can have a cat at home, especially in later life. PawVibesZ brings real cats to you — live, interactive, and full of personality — no allergies, no vet bills, pure joy.</p>
+        </div>
+        <div class="cat-fact">
+          <h4>🤝 A Social Experience</h4>
+          <p>Each session brings together people who love cats. For your generation that values community and friendship, PawVibesZ sessions are also a chance to chat, laugh, and connect with kindred spirits.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HERITAGE ===== -->
+<section class="heritage-section">
+  <div class="section-inner">
+    <span class="section-label">Cultural Heritage &amp; Roots</span>
+    <h2 class="section-title">A Generation<br>That Shaped History</h2>
+    <p class="section-text" style="color:rgba(255,255,255,0.8)">
+      The Silent Generation is one of the most historically significant cohorts in modern times.
+      Here is the rich heritage you carry with you:
+    </p>
+    <div class="heritage-grid">
+      <div class="heritage-card">
+        <span class="h-icon">🇺🇸</span>
+        <h3>Great Depression Resilience</h3>
+        <p>Growing up in the 1930s instilled a lifelong ethic of thrift, resourcefulness, and gratitude. You learned to make do — and to find joy in simplicity, including in the company of animals.</p>
+      </div>
+
+      <div class="heritage-card">
+        <span class="h-icon">🎺</span>
+        <h3>Big Band to Rock &amp; Roll</h3>
+        <p>You danced to the swing era and then created rock and roll. Elvis Presley, born 1935, was a Silent. So was John Coltrane. Your generation gave the world its most enduring music.</p>
+      </div>
+      <div class="heritage-card">
+        <span class="h-icon">📖</span>
+        <h3>The "Seen Not Heard" Upbringing</h3>
+        <p>Raised under strict discipline to be respectful and measured, your generation's "silence" was a product of the times — not a lack of depth, passion, or fierce conviction.</p>
+      </div>
+      <div class="heritage-card">
+        <span class="h-icon">🌍</span>
+        <h3>Postwar Builders</h3>
+        <p>From the Marshall Plan to the welfare state, from the NHS to the interstate highway system — the postwar world was physically and socially built by your hands and minds.</p>
+      </div>
+      <div class="heritage-card">
+        <span class="h-icon">🏠</span>
+        <h3>Community &amp; Neighbourhood</h3>
+        <p>Your childhood was defined by neighbourhood life — street games, local shops, knowing your neighbours by name. Cats roamed those streets too, part of the fabric of community.</p>
+      </div>
+      <div class="heritage-card">
+        <span class="h-icon">✝️</span>
+        <h3>Faith &amp; Tradition</h3>
+        <p>Your generation maintained strong ties to faith, family, and tradition — values that created the stable communities in which pets, companionship, and mutual care flourished.</p>
+      </div>
+      <div class="heritage-card">
+        <span class="h-icon">🔭</span>
+        <h3>Lifetime of Innovation</h3>
+        <p>You witnessed the atom bomb, moon landings, colour TV, personal computers, and now Zoom — more technological transformation than any generation before. And you adapted every time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUOTES ===== -->
+<section class="quotes-section">
+  <div class="section-inner">
+    <span class="section-label" style="color:var(--teal)">Words of Wisdom &amp; Joy</span>
+    <h2 class="section-title">What PawVibesZ<br>Members Say</h2>
+    <div class="quotes-grid">
+      <div class="quote-card q-teal">
+        <blockquote>
+          "I lost my cat of 17 years last spring. I wasn't ready for another. But PawVibesZ lets me visit with cats every Tuesday. It has done wonders for my heart."
+        </blockquote>
+        <cite>— Margaret, 84, retired schoolteacher</cite>
+      </div>
+      <div class="quote-card q-gold">
+        <blockquote>
+          "I was skeptical about this Zoom business. My granddaughter set it up for me. Now I look forward to the Friday morning cat session more than anything."
+        </blockquote>
+        <cite>— Harold, 79, former postal worker</cite>
+      </div>
+      <div class="quote-card q-rose">
+        <blockquote>
+          "We grew up with cats in the house — they were just part of life. PawVibesZ brings that feeling back. A familiar comfort in a very changed world."
+        </blockquote>
+        <cite>— Dorothy, 82, retired nurse</cite>
+      </div>
+      <div class="quote-card q-lavender">
+        <blockquote>
+          "The little orange tabby on Thursday's session always comes right up to the camera. I swear he knows I'm there. I've started calling him Franklin."
+        </blockquote>
+        <cite>— Ernest, 77, veteran &amp; woodworker</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="cta-section">
+  <div class="section-inner" style="text-align:center">
+    <div class="cta-cats">😺 🐾 🐱</div>
+    <h2>Your Next Purr<br>is One Click Away</h2>
+    <p>
+      You built the world. You deserve a moment of pure, uncomplicated joy.
+      PawVibesZ cats are waiting to meet you — live, warm, and wonderfully fuzzy.
+    </p>
+    <a href="https://paniaguai.github.io/pawz/" target="_blank" class="btn-primary" style="font-size:20px; padding:20px 52px; display:inline-block">
+      🐾 Visit PawVibesZ Now
+    </a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <span class="footer-paws">🐾 🐱 🐾 🐱 🐾</span>
+  <div class="footer-title">PawVibesZ</div>
+  <p>Cats on Zoom — Made with Love for the Silent Generation</p>
+  <p style="margin:12px 0">
+    <a href="https://paniaguai.github.io/pawz/" target="_blank">🌐 Official Site: paniaguai.github.io/pawz</a>
+  </p>
+  <p style="margin-top:16px; font-size:13px; opacity:0.5">
+    For the Builders · The Traditionalists · Born 1928–1945<br>
+    You made the world. Let cats make your day. 🐱
+  </p>
+</footer>
+
+<script>
+  // Generate floating paw prints
+  const pawBg = document.getElementById('pawBg');
+  const paws = ['🐾','🐱','😺','🐈','😸'];
+  for (let i = 0; i < 22; i++) {
+    const span = document.createElement('span');
+    span.textContent = paws[Math.floor(Math.random() * paws.length)];
+    span.style.left = Math.random() * 100 + 'vw';
+    span.style.animationDuration = (8 + Math.random() * 14) + 's';
+    span.style.animationDelay = (Math.random() * 12) + 's';
+    span.style.fontSize = (18 + Math.random() * 30) + 'px';
+    pawBg.appendChild(span);
+  }
+
+  // Animate timeline items on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateX(0)';
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.tl-item').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateX(-30px)';
+    el.style.transition = `opacity 0.6s ease ${i * 0.1}s, transform 0.6s ease ${i * 0.1}s`;
+    observer.observe(el);
+  });
+
+  document.querySelectorAll('.gen-card, .heritage-card, .quote-card').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = `opacity 0.6s ease ${(i % 4) * 0.1}s, transform 0.6s ease ${(i % 4) * 0.1}s`;
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
